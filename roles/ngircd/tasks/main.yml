@@ -30,9 +30,6 @@
   - restart ngircd
   - etckeeper commit
 
-#- command: test -d /etc/ngircd
-#  register: ngircd_installed
-#  ignore_errors: True
 - file: path=/etc/ngircd owner=root group=root mode=0755 state=directory
   notify: etckeeper commit
 
@@ -42,7 +39,5 @@
     umask 027 &&
     openssl dhparam -out {{ IrcdDHFile }} 2048
   notify: etckeeper commit
-#  when: ngircd_installed|success
 - file: path={{ IrcdDHFile }} owner=root group={{ IrcdServerGID }} mode=0640
   notify: etckeeper commit
-#  when: ngircd_installed|success
