@@ -1,0 +1,5 @@
+---
+- hosts: ngircd-servers
+  sudo: true
+  roles:
+    - role: ngircd

@@ -1,0 +1,20 @@
+IrcdHostname: "nadoka-ccvps.n-z.jp"
+#
+IrcdNetworkName: "nadoka.example.net"
+IrcdAdminInfo1: "Debian User"
+IrcdAdminInfo2: "Debian City"
+IrcdAdminEMail: "irc@irc.example.com"
+IrcdServerGID: "irc"
+IrcdServerUID: "irc"
+IrcdInfo: "Yet another IRC Server running on Debian GNU/Linux"
+IrcdPassword: "nadokapass"
+IrcdMaxNickLength: 18
+IrcdCertFileBasename: "{{ IrcdHostname }}.crt"
+IrcdCertFile: "/etc/ssl/certs/{{ IrcdHostname }}.crt"
+IrcdDHFile: "/etc/ngircd/dhparams.pem"
+IrcdKeyFileBasename: "{{ IrcdHostname }}.key"
+IrcdKeyFile: "/etc/ssl/private/{{ IrcdKeyFileBasename }}"
+IrcdSSLPorts: 6697
+#
+IrcdCSRSubj: "/C=JP/ST=Osaka/L=Osaka City/CN={{ IrcdHostname }}"
+IrcdCSRFile: "/etc/ssl/{{ IrcdHostname }}.csr"
