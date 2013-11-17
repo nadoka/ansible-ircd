@@ -1,3 +1,5 @@
 ---
 - name: restart ngircd
   service: name=ngircd state=restarted
+- name: etckeeper commit
+  command: etckeeper commit "ansible-ircd"

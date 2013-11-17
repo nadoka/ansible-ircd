@@ -3,29 +3,37 @@
     creates={{ IrcdKeyFile }}
     umask 027 &&
     openssl genrsa -out {{ IrcdKeyFile }} 2048
+  notify: etckeeper commit
 - file: path={{ IrcdKeyFile }} owner=root group={{ IrcdServerGID }} mode=0640
+  notify: etckeeper commit
 - shell: |
     creates={{ IrcdCSRFile }}
     umask 022 &&
     openssl req -new -key {{ IrcdKeyFile }} -out {{ IrcdCSRFile }} -batch -subj "{{ IrcdCSRSubj }}"
+  notify: etckeeper commit
 
 - copy: src={{ IrcdCertFileBasename }} dest={{ IrcdCertFile }} owner=root group={{ IrcdServerGID }} mode=0644
   notify: restart ngircd
+  notify: etckeeper commit
 
 - apt: pkg=ngircd
 - template: src=ngircd.conf.j2 dest=/etc/ngircd/ngircd.conf owner=root group={{ IrcdServerGID }} mode=0640
   notify: restart ngircd
+  notify: etckeeper commit
 
 #- command: test -d /etc/ngircd
 #  register: ngircd_installed
 #  ignore_errors: True
 - file: path=/etc/ngircd owner=root group=root mode=0755 state=directory
+  notify: etckeeper commit
 
 - name: create {{ IrcdDHFile }} (This is going to take a long time)
   shell: |
     creates={{ IrcdDHFile }}
     umask 027 &&
     openssl dhparam -out {{ IrcdDHFile }} 2048
+  notify: etckeeper commit
 #  when: ngircd_installed|success
 - file: path={{ IrcdDHFile }} owner=root group={{ IrcdServerGID }} mode=0640
+  notify: etckeeper commit
 #  when: ngircd_installed|success
