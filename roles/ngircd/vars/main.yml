@@ -1,12 +1,12 @@
 IrcdHostname: "nadoka-ccvps.n-z.jp"
 #
 IrcdNetworkName: "nadoka.example.net"
-IrcdAdminInfo1: "Debian User"
+IrcdAdminInfo1: "Nadoka User"
 IrcdAdminInfo2: "Debian City"
 IrcdAdminEMail: "irc@irc.example.com"
 IrcdServerGID: "irc"
 IrcdServerUID: "irc"
-IrcdInfo: "Yet another IRC Server running on Debian GNU/Linux"
+IrcdInfo: "Yet another IRC Server running for nadoka-san"
 IrcdPassword: "nadokapass"
 IrcdMaxNickLength: 18
 IrcdCertFileBasename: "{{ IrcdHostname }}.crt"
