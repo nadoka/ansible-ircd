@@ -13,19 +13,22 @@
   notify: etckeeper commit
 
 - copy: src={{ IrcdCertFileBasename }} dest={{ IrcdCertFile }} owner=root group={{ IrcdServerGID }} mode=0644
-  notify: restart ngircd
-  notify: etckeeper commit
+  notify:
+  - restart ngircd
+  - etckeeper commit
 
 # allow irc user to access /etc/ssl/private
 - apt: pkg=ssl-cert
 - user: name={{ IrcdServerUID }} groups=ssl-cert
-  notify: restart ngircd
-  notify: etckeeper commit
+  notify:
+  - restart ngircd
+  - etckeeper commit
 
 - apt: pkg=ngircd
 - template: src=ngircd.conf.j2 dest=/etc/ngircd/ngircd.conf owner=root group={{ IrcdServerGID }} mode=0640
-  notify: restart ngircd
-  notify: etckeeper commit
+  notify:
+  - restart ngircd
+  - etckeeper commit
 
 #- command: test -d /etc/ngircd
 #  register: ngircd_installed
